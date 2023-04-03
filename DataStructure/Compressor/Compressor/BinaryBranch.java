@@ -20,48 +20,7 @@ public class BinaryBranch<T> {
         leaf = false; 
     }
 
-
-    public boolean hasTargetLeaf (T targert) {
-
-        if (leaf) {
-            if (info == targert) {
-                return true;
-            } else {
-                return false; 
-            }
-        }
-
-        if (left.hasTargetLeaf(targert)) { 
-            return true;
-        } else if (right.hasTargetLeaf(targert)) {
-            return true;
-        } else {
-            return false; 
-        }
-
-    }
-
-    public String TargetLeafPath (T target) {
-        String code = "";
-
-
-        if (!leaf) {
-            if (left.hasTargetLeaf(target)) {
-                code += "1"; 
-                code += left.TargetLeafPath(target); 
-                return code; 
-            } else if (right.hasTargetLeaf(target)) {
-                code += "0"; 
-                code += right.TargetLeafPath(target);
-                return code; 
-            } 
-        }
-        return code; 
-
-
-    }
-
-
+    // trarse the tree to fill up the map with the code for each leaf, map is stored in the root
     public void traverseTree(BinaryBranch<T> root, String code) {
         
         if (root.leaf) {
@@ -69,6 +28,7 @@ public class BinaryBranch<T> {
             traverseCodes.put(root.info, code);
 
         } else {
+            
             String code_left = code + '1'; 
             String code_right = code + '0'; 
             traverseTree(root.left, code_left);
